@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+  app:
+    build: .
+    command: bundle exec rails s -b 172.29.17.222
+    volumes:
+      - .:/hw5
+    ports:
+      - "3000:3000"
+   
+
