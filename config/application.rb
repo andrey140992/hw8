@@ -10,6 +10,7 @@ module Hw5
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.web_console.whitelisted_ips = '192.168.0.0/16'
 
     # Configuration for the application, engines, and railties goes here.
     #

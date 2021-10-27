@@ -1,11 +1,50 @@
 version: "3.9"
 services:
+  webpacker:
+    build: .
+    env_file:
+      - '.env.docker'
+    command: ./bin/webpack-dev-server
+    volumes:
+      - .:/hw5
+    ports:
+      - '3035:3035'
   app:
     build: .
-    command: bundle exec rails s -b 172.29.17.222
+    env_file:
+      - '.env.docker'
+    command: bundle exec rails s -b 0.0.0.0
     volumes:
       - .:/hw5
     ports:
       - "3000:3000"
-   
+  calc_service:
+    build: ./calc_service
+    command: bundle exec ruby docRep.rb
+    ports:
+      - "4567:4567"
+    volumes:
+      - ./calc_service:/calc_service
+  sidekiq:
+    build: .
+    env_file:
+      - '.env.docker'
+    command: bundle exec sidekiq
+    volumes:
+      - .:/hw5
+  redis:
+    image: redis
+    volumes:
+      - ./redis_data:/data
+  rabbitmq:
+    image: rabbitmq:management-alpine
+    volumes:
+      - rabbit:/var/lib/rabbitmq
+  order_performer:
+    build: ./order_performer
+    command: ruby main.rb
+    volumes:
+      - ./order_performer:/order_performer
 
+volumes:
+  rabbit:
