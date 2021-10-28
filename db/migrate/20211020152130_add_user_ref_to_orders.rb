@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddUserRefToOrders < ActiveRecord::Migration[6.1]
   def up
     add_reference :orders, :user, foreign_key: true

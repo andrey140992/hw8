@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
-  root "hello#index"
+  root 'hello#index'
 
   devise_for :users
 
   resources :users
 
-  get "/articles", to: "articles#index"
+  get '/articles', to: 'articles#index'
 
   resources :orders do 
     get 'approve', on: :member
@@ -14,4 +16,3 @@ Rails.application.routes.draw do
     get 'make_report', on: :collection
   end
 end
-

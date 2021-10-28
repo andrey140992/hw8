@@ -1,4 +1,6 @@
+# frozen_string_literal: true
+
+# main page controller
 class HelloController < ApplicationController
-    def index
-    end
+  def index; end
 end

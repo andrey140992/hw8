@@ -29,7 +29,7 @@ http://localhost:3000/orders/make_report?report_type=VM_with_maximum_vol_of_dop_
 2.
  В одном терминале запускаем RabbitMQ   docker-compose up rabbitmq
 
- В другом запускаем сервер docker-compose up 
+ В другом запускаем сервер docker compose up sidekiq redis order_performer calc_service app webpacker 
 
  http://localhost:3000/orders/:id/perform_order
  где :id - это id ордера

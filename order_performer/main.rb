@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'eventmachine'
 require 'bunny'
 
@@ -18,9 +20,9 @@ def really_slow_task(payload)
   'Order is performed successfully'
 end
 
-puts "before running"
+puts 'before running'
 EventMachine.run do
-  puts "\n\n starting EventMachine"
+  puts '\n\n starting EventMachine'
   connection = Bunny.new('amqp://guest:guest@rabbitmq')
   connection.start
 
@@ -29,7 +31,7 @@ EventMachine.run do
   exchange = channel.default_exchange
 
   queue.subscribe do |delivery_info, metadata, payload|
-    puts "new message"
+    puts 'new message'
     result = really_slow_task(payload)
 
     exchange.publish(
@@ -49,5 +51,5 @@ EventMachine.run do
     connection.close { EventMachine.stop }
   end
 
-  puts "EventMachine has started \n\n"
+  puts 'EventMachine has started \n\n'
 end
